@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 19:28:47 by jaubry--          #+#    #+#              #
-#    Updated: 2025/08/20 20:14:51 by jaubry--         ###   ########.fr        #
+#    Updated: 2025/08/20 20:33:45 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ ifeq ($(FAST),1)
 				  -march=native -mtune=native -msse3
 	FFLAGS		= $(OFLAGS) -flto
 endif
-#-flto
 
 # Sys binaries
 STD_AR			= ar
