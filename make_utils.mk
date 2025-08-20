@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 19:28:47 by jaubry--          #+#    #+#              #
-#    Updated: 2025/08/20 20:33:45 by jaubry--         ###   ########.fr        #
+#    Updated: 2025/08/20 21:49:20 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,7 @@ endif
 #-pg -Rpass-missed=.*
 
 ifeq ($(FAST),1)
-	OFLAGS		= -Ofast -ffast-math -funroll-loops \
-				  -march=native -mtune=native -msse3
+	OFLAGS		= -Ofast -march=native -mtune=native -msse3
 	FFLAGS		= $(OFLAGS) -flto
 endif
 
