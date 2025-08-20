@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/07 15:57:36 by jaubry--          #+#    #+#              #
-#    Updated: 2025/08/16 00:13:02 by jaubry--         ###   ########.fr        #
+#    Updated: 2025/08/20 21:14:03 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ PURPLE		= \\033[38;5;129m
 
 # Print utils
 SILENCE		= 1> /dev/null
-MUTE		= $(SILENT) 2> /dev/null
+MUTE		= $(SILENCE) 2> /dev/null
 
 define color
 	@echo -e "$(1)$(subst %UL%,$(UNDERLINE),$(subst %NUL%,$(NOUNDERLINE),$(2)))$(RESET)"
