@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 19:28:47 by jaubry--          #+#    #+#              #
-#    Updated: 2025/08/20 21:49:20 by jaubry--         ###   ########.fr        #
+#    Updated: 2025/09/09 10:12:33 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,12 +39,19 @@ endif
 
 # Sys binaries
 STD_AR			= ar
-FAST_AR			= llvm-ar-12
-
 STD_RANLIB		= ranlib
-FAST_RANLIB		= llvm-ranlib-12
 
-MLX_GCC			= gcc-12
+ifeq ($(shell uname -r), 6.16.5-2-cachyos)
+	FAST_AR		= llvm-ar
+	FAST_RANLIB	= llvm-ranlib
+
+	MLX_GCC		= gcc-14
+else
+	FAST_AR		= llvm-ar-12
+	FAST_RANLIB	= llvm-ranlib-12
+
+	MLX_GCC		= gcc-12
+endif
 
 # Print utils
 include $(ROOTDIR)/mkidir/colors.mk
