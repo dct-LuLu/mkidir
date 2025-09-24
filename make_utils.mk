@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 19:28:47 by jaubry--          #+#    #+#              #
-#    Updated: 2025/09/09 10:12:33 by jaubry--         ###   ########.fr        #
+#    Updated: 2025/09/24 19:41:29 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,9 +41,11 @@ endif
 STD_AR			= ar
 STD_RANLIB		= ranlib
 
-ifeq ($(shell uname -r), 6.16.5-2-cachyos)
-	FAST_AR		= llvm-ar
-	FAST_RANLIB	= llvm-ranlib
+GET_ID = cat /etc/machine-id | sha256sum | cut -d' ' -f1
+HOME_ID	= 6bb6eb3dbd1b58e9b11f9bba389b9fa248353ef0dd2fea7e9f1f5aeed881747d
+ifeq ($(shell $(GET_ID)), $(HOME_ID))
+	FAST_AR		= ar
+	FAST_RANLIB	= ranlib
 
 	MLX_GCC		= gcc-14
 else
