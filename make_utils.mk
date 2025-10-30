@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 19:28:47 by jaubry--          #+#    #+#              #
-#    Updated: 2025/09/24 19:41:29 by jaubry--         ###   ########.fr        #
+#    Updated: 2025/10/30 09:33:04 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,13 @@ ifeq ($(FAST),1)
 else ifeq ($(DEBUG),1)
 	RULE = debug
 endif
+
+# Variables
+NPROC		= $(shell nproc)
+
+MAX_SIZE	= $(shell xrandr | grep "primary" | awk '{print $$4}' | cut -d '+' -f 1)
+MAX_WIDTH	= $(shell echo $(MAX_SIZE) | cut -d 'x' -f 1)
+MAX_HEIGHT	= $(shell echo $(MAX_SIZE) | cut -d 'x' -f 2)
 
 # Dep Directories
 LIBDIR		= $(ROOTDIR)/lib
