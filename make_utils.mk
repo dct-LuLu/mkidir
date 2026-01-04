@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 19:28:47 by jaubry--          #+#    #+#              #
-#    Updated: 2025/10/30 09:33:04 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/01/04 21:32:36 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,17 +14,23 @@ SHELL		:= /bin/bash
 
 # Makefile Variables
 FAST		= $(if $(filter fast,$(MAKECMDGOALS)),1,0)
-DEBUG		= $(if $(filter debug,$(MAKECMDGOALS)),1,0)
+INSPECT		= $(if $(filter inspect,$(MAKECMDGOALS)),1,0)
+PROFILE		= $(if $(filter profile,$(MAKECMDGOALS)),1,0)
 
 ifeq ($(FAST),1)
 	RULE = fast
-else ifeq ($(DEBUG),1)
-	RULE = debug
+else ifeq ($(INSPECT),1)
+	RULE = inspect
+else ifeq ($(PROFILE),1)
+	RULE = profile
 endif
 
 # Variables
 NPROC		= $(shell nproc)
 
+#RESOLUTION	= $(shell xrandr | sed -n '/primary/{n;p;}' | awk '{print $$1}')
+#MAX_WIDTH	= $(shell echo $(RESOLUTION) | cut -d 'x' -f 1)
+#MAX_HEIGHT	= $(shell echo $(RESOLUTION) | cut -d 'x' -f 2-)
 MAX_SIZE	= $(shell xrandr | grep "primary" | awk '{print $$4}' | cut -d '+' -f 1)
 MAX_WIDTH	= $(shell echo $(MAX_SIZE) | cut -d 'x' -f 1)
 MAX_HEIGHT	= $(shell echo $(MAX_SIZE) | cut -d 'x' -f 2)
@@ -34,10 +40,11 @@ LIBDIR		= $(ROOTDIR)/lib
 MKIDIR		= $(ROOTDIR)/.
 
 # Flags
-ifeq ($(DEBUG),1)
-	DEBUG_FLAGS = -g3
+ifeq ($(PROFILE),1)
+	PROFILE_FLAGS = -g3 -pg -Rpass-missed=.*
+else ifeq ($(INSPECT),1)
+	INSPECT_FLAGS = -g3
 endif
-#-pg -Rpass-missed=.*
 
 ifeq ($(FAST),1)
 	OFLAGS		= -Ofast -march=native -mtune=native -msse3
