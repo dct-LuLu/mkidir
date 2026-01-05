@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/07 15:57:36 by jaubry--          #+#    #+#              #
-#    Updated: 2025/08/20 21:14:03 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/01/05 09:49:02 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,21 +30,29 @@ PURPLE		= \\033[38;5;129m
 SILENCE		= 1> /dev/null
 MUTE		= $(SILENCE) 2> /dev/null
 
+ifeq ($(DEBUG),1)
+	MODE = debug
+else ifeq ($(INSPECT),1)
+	MODE = inspect
+else ifeq ($(PROFILE),1)
+	MODE = profile
+endif
+
 define color
 	@echo -e "$(1)$(subst %UL%,$(UNDERLINE),$(subst %NUL%,$(NOUNDERLINE),$(2)))$(RESET)"
 endef
 
 # LIB
 define ar-msg
-$(if $(filter $(DEBUG),1),\
-	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Creating debug library archive %UL%$@%NUL%..."),\
+$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Creating $(MODE) library archive %UL%$@%NUL%..."),\
 	$(call color,$(PURPLE)$(BOLD),"$(NL)〙Creating library archive %UL%$@%NUL%...")
 )
 endef
 
 define lib-build-msg
-$(if $(filter $(DEBUG),1),\
-	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Compiling %UL%$(NAME)%NUL% library objects in debug mode..."),\
+$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Compiling %UL%$(NAME)%NUL% library objects in $(MODE) mode..."),\
 	$(call color,$(PURPLE)$(BOLD),"$(NL)〙Compiling %UL%$(NAME)%NUL% library objects...")
 )
 endef
@@ -54,8 +62,8 @@ define lib-compile-obj-msg
 endef
 
 define ar-finish-msg
-$(if $(filter $(DEBUG),1),\
-	$(call color,$(ORANGE)$(BOLD),"✓ Library archive %UL%$@%NUL% debug build complete"),\
+$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+	$(call color,$(ORANGE)$(BOLD),"✓ Library archive %UL%$@%NUL% $(MODE) build complete"),\
 	$(call color,$(GREEN)$(BOLD),"✓ Library archive %UL%$@%NUL% successfully created!")
 )
 endef
@@ -67,15 +75,15 @@ endef
 
 # BIN
 define bin-link-msg
-$(if $(filter $(DEBUG),1),\
-	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Linking %UL%$@%NUL% with debug mode..."),\
+$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Linking %UL%$@%NUL% with $(MODE) mode..."),\
 	$(call color,$(PURPLE)$(BOLD),"$(NL)〙Linking program %UL%$@%NUL%...")
 )
 endef
 
 define bin-build-msg
-$(if $(filter $(DEBUG),1),\
-	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Compiling %UL%$(NAME)%NUL% binary objects in debug mode..."),\
+$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Compiling %UL%$(NAME)%NUL% binary objects in $(MODE) mode..."),\
 	$(call color,$(PURPLE)$(BOLD),"$(NL)〙Compiling %UL%$(NAME)%NUL% binary objects...")
 )
 endef
@@ -85,8 +93,8 @@ define bin-compile-obj-msg
 endef
 
 define bin-finish-msg
-$(if $(filter $(DEBUG),1),\
-	$(call color,$(ORANGE)$(BOLD),"✓ Binary %UL%$@%NUL% debug build complete"),\
+$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+	$(call color,$(ORANGE)$(BOLD),"✓ Binary %UL%$@%NUL% $(MODE) build complete"),\
 	$(call color,$(GREEN)$(BOLD),"✓ Program %UL%$@%NUL% successfully created!")
 )
 endef
