@@ -41,7 +41,7 @@ MKIDIR		= $(ROOTDIR)/.
 
 # Flags
 ifeq ($(PROFILE),1)
-	PROFILE_FLAGS = -g3 -pg -Rpass-missed=.*
+	PROFILE_FLAGS = -g3 -pg
 else ifeq ($(INSPECT),1)
 	INSPECT_FLAGS = -g3
 endif
@@ -53,20 +53,35 @@ endif
 
 # Sys binaries
 STD_AR			= ar
-STD_RANLIB		= ranlib
+STD_ar			= ranlib
+
+HOME_AR			= ar
+HOME_RANLIB		= ranlib
+HOME_GCC		= gcc-14
+HOME_CFLAGS		= -Wno-error=maybe-uninitialized \
+				  -Wno-error=stringop-overflow
+
+FT_AR			= llvm-ar-12
+FT_RANLIB		= llvm-ranlib-12
+FT_GCC			= gcc-12
 
 GET_ID = cat /etc/machine-id | sha256sum | cut -d' ' -f1
 HOME_ID	= 6bb6eb3dbd1b58e9b11f9bba389b9fa248353ef0dd2fea7e9f1f5aeed881747d
 ifeq ($(shell $(GET_ID)), $(HOME_ID))
-	FAST_AR		= ar
-	FAST_RANLIB	= ranlib
+	FAST_AR			= $(HOME_AR)
+	FAST_RANLIB		= $(HOME_RANLIB)
 
-	MLX_GCC		= gcc-14
+	MLX_GCC			= $(HOME_GCC)
+
+	CC				= cc $(HOME_CFLAGS)
 else
-	FAST_AR		= llvm-ar-12
-	FAST_RANLIB	= llvm-ranlib-12
+ifeq ($(PROFILE),1)
+	PROFILE_FLAGS	+= -Rpass-missed=.*
+endif
+	FAST_AR			= $(FT_AR)
+	FAST_RANLIB		= $(FT_RANLIB)
 
-	MLX_GCC		= gcc-12
+	MLX_GCC			= $(FT_GCC)
 endif
 
 # Print utils
