@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 19:28:47 by jaubry--          #+#    #+#              #
-#    Updated: 2026/01/04 21:32:36 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/01/07 23:57:15 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ HOME_AR			= ar
 HOME_RANLIB		= ranlib
 HOME_GCC		= gcc-14
 HOME_CFLAGS		= -Wno-error=maybe-uninitialized \
-				  -Wno-error=stringop-overflow
+				  -Wno-error=stringop-overflow \
+				  -Wno-error=alloc-size
 
 FT_AR			= llvm-ar-12
 FT_RANLIB		= llvm-ranlib-12
