@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/07 15:57:36 by jaubry--          #+#    #+#              #
-#    Updated: 2026/01/05 09:49:02 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/02/07 03:25:20 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,11 +92,16 @@ define bin-compile-obj-msg
 	$(call color,$(BLUE),"╰┈➤ Compiling %UL%$<")
 endef
 
+define san-msg
+	$(call color,$(YELLOW)$(BOLD),$(NL)=== $(SAN_MODE) BUILD COMPLETE ===$(NL)Run with:$(NL)$(NL)export $(SAN_EXPORT) ; ./$(NAME)$(NL))
+endef
+
 define bin-finish-msg
 $(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
 	$(call color,$(ORANGE)$(BOLD),"✓ Binary %UL%$@%NUL% $(MODE) build complete"),\
 	$(call color,$(GREEN)$(BOLD),"✓ Program %UL%$@%NUL% successfully created!")
 )
+$(if $(filter $(SAN_MEM)  $(SAN_LEAK) $(SAN_UB),1),$(call san-msg),)
 endef
 
 define rm-bin-msg
