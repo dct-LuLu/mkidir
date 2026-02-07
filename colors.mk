@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/07 15:57:36 by jaubry--          #+#    #+#              #
-#    Updated: 2026/02/07 03:25:20 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/02/07 04:33:18 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,8 +92,9 @@ define bin-compile-obj-msg
 	$(call color,$(BLUE),"╰┈➤ Compiling %UL%$<")
 endef
 
+MINIRT_CMD = junest -n RUSTICL_ENABLE='radeonsi' ./$(NAME) asset/42.rt
 define san-msg
-	$(call color,$(YELLOW)$(BOLD),$(NL)=== $(SAN_MODE) BUILD COMPLETE ===$(NL)Run with:$(NL)$(NL)export $(SAN_EXPORT) ; ./$(NAME)$(NL))
+	$(call color,$(YELLOW)$(BOLD),$(NL)=== $(SAN_MODE) BUILD COMPLETE ===$(NL)Run with:$(NL)$(NL)export $(SAN_EXPORT) ; $(MINIRT_CMD)$(NL))
 endef
 
 define bin-finish-msg

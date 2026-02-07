@@ -6,16 +6,16 @@
 #    By: jaubry-- <jaubry--@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/07 02:07:43 by jaubry--          #+#    #+#              #
-#    Updated: 2026/02/07 03:57:45 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/02/07 06:08:26 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ASAN_OPTIONS=detect_leaks=0:quarantine_size_mb=512:redzone=128:max_redzone=2048:report_globals=1:check_initialization_order=1:strict_init_order=1:detect_stack_use_after_return=1:min_uar_stack_size_log=16:max_uar_stack_size_log=20:detect_container_overflow=1:detect_odr_violation=2:strict_string_checks=1:replace_str=1:replace_intrin=1:print_stats=1:print_legend=1:atexit=1:print_full_thread_history=1:alloc_dealloc_mismatch=1:new_delete_type_mismatch=1:poison_heap=1:poison_partial=1:poison_array_cookie=1:max_malloc_fill_size=8192:allow_user_poisoning=1:check_malloc_usable_size=1:sleep_before_dying=0:verbosity=2:halt_on_error=0:dump_instruction_bytes=1:protect_shadow_gap=1
+ASAN_OPTIONS=detect_leaks=0:quarantine_size_mb=512:redzone=128:max_redzone=2048:report_globals=1:check_initialization_order=1:strict_init_order=1:detect_stack_use_after_return=1:min_uar_stack_size_log=16:max_uar_stack_size_log=20:detect_container_overflow=1:detect_odr_violation=2:strict_string_checks=1:replace_str=1:replace_intrin=1:print_stats=1:print_legend=1:atexit=1:print_full_thread_history=1:alloc_dealloc_mismatch=1:new_delete_type_mismatch=1:poison_heap=1:poison_partial=1:poison_array_cookie=1:max_malloc_fill_size=8192:allow_user_poisoning=1:check_malloc_usable_size=1:sleep_before_dying=0:verbosity=1:halt_on_error=0:dump_instruction_bytes=1:protect_shadow_gap=1:interceptor_via_fun=0
 
-LSAN_OPTIONS="verbosity=2:log_threads=0:log_pointers=0:report_objects=0:use_registers=1:use_globals=1:use_stacks=1:use_root_regions=1:use_ld_allocations=1:use_tls=1:use_unaligned=1:print_suppressions=0:max_leaks=0:exitcode=23"
-LASAN_OPTIONS="detect_leaks=1:leak_check_at_exit=1:malloc_context_size=50:print_full_thread_history=1:verbosity=2"
+LSAN_OPTIONS="verbosity=1:log_threads=0:log_pointers=0:report_objects=0:use_registers=1:use_globals=1:use_stacks=1:use_root_regions=1:use_ld_allocations=1:use_tls=1:use_unaligned=1:print_suppressions=0:max_leaks=0:exitcode=23"
+LASAN_OPTIONS="detect_leaks=1:leak_check_at_exit=1:malloc_context_size=50:print_full_thread_history=1:verbosity=1"
 
-UBSAN_OPTIONS="print_stacktrace=1:halt_on_error=0:verbosity=2:report_error_type=1"
+UBSAN_OPTIONS="print_stacktrace=1:halt_on_error=0:verbosity=1:report_error_type=1"
 
 
 
