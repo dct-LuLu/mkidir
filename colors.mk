@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/07 15:57:36 by jaubry--          #+#    #+#              #
-#    Updated: 2026/02/12 02:13:25 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/02/12 07:53:57 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,22 @@ SILENCE		= 1> /dev/null
 MUTE		= $(SILENCE) 2> /dev/null
 
 ifeq ($(DEBUG),1)
-	MODE = debug
+	MODE = [DEBUG]
 else ifeq ($(INSPECT),1)
-	MODE = inspect
+	MODE = [INSPECT]
 else ifeq ($(PROFILE),1)
-	MODE = profile
+	MODE = [PROFILE]
+else ifeq ($(SAN_MEM),1)
+	MODE = [MEMORY-SANITIZER]
+else ifeq ($(SAN_LEAK),1)
+	MODE = [LEAK-SANITIZER]
+else ifeq ($(SAN_UB),1)
+	MODE = [UNDEFINED-BEHAVIOUR-SANITIZER]
+endif
+
+DEBUG_MODE = 0
+ifeq ($(filter $(DEBUG) $(INSPECT) $(PROFILE) $(SAN_MEM) $(SAN_LEAK) $(SAN_UB), 1),1)
+	DEBUG_MODE = 1
 endif
 
 define color
@@ -44,14 +55,14 @@ endef
 
 # LIB
 define ar-msg
-$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+$(if $(filter $(DEBUG_MODE),1),\
 	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Creating $(MODE) library archive %UL%$@%NUL%..."),\
 	$(call color,$(PURPLE)$(BOLD),"$(NL)〙Creating library archive %UL%$@%NUL%...")
 )
 endef
 
 define lib-build-msg
-$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+$(if $(filter $(DEBUG_MODE),1),\
 	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Compiling %UL%$(NAME)%NUL% library objects in $(MODE) mode..."),\
 	$(call color,$(PURPLE)$(BOLD),"$(NL)〙Compiling %UL%$(NAME)%NUL% library objects...")
 )
@@ -62,7 +73,7 @@ define lib-compile-obj-msg
 endef
 
 define ar-finish-msg
-$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+$(if $(filter $(DEBUG_MODE),1),\
 	$(call color,$(ORANGE)$(BOLD),"✓ Library archive %UL%$@%NUL% $(MODE) build complete"),\
 	$(call color,$(GREEN)$(BOLD),"✓ Library archive %UL%$@%NUL% successfully created!")
 )
@@ -75,14 +86,14 @@ endef
 
 # BIN
 define bin-link-msg
-$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+$(if $(filter $(DEBUG_MODE),1),\
 	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Linking %UL%$@%NUL% with $(MODE) mode..."),\
 	$(call color,$(PURPLE)$(BOLD),"$(NL)〙Linking program %UL%$@%NUL%...")
 )
 endef
 
 define bin-build-msg
-$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+$(if $(filter $(DEBUG_MODE),1),\
 	$(call color,$(YELLOW)$(BOLD),"$(NL)⚠ Compiling %UL%$(NAME)%NUL% binary objects in $(MODE) mode..."),\
 	$(call color,$(PURPLE)$(BOLD),"$(NL)〙Compiling %UL%$(NAME)%NUL% binary objects...")
 )
@@ -98,11 +109,11 @@ define san-msg
 endef
 
 define bin-finish-msg
-$(if $(filter $(DEBUG) $(INSPECT) $(PROFILE),1),\
+$(if $(filter $(DEBUG_MODE),1),\
 	$(call color,$(ORANGE)$(BOLD),"✓ Binary %UL%$@%NUL% $(MODE) build complete"),\
 	$(call color,$(GREEN)$(BOLD),"✓ Program %UL%$@%NUL% successfully created!")
 )
-$(if $(filter $(SAN_MEM)  $(SAN_LEAK) $(SAN_UB),1),$(call san-msg),)
+$(if $(filter $(SAN_MEM) $(SAN_LEAK) $(SAN_UB),1),$(call san-msg),)
 endef
 
 define rm-bin-msg
