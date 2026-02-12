@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 19:28:47 by jaubry--          #+#    #+#              #
-#    Updated: 2026/02/07 02:15:38 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/02/12 22:24:59 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,8 @@ ifeq ($(shell $(GET_ID)), $(HOME_ID))
 	MLX_GCC			= $(HOME_GCC)
 
 	CC				= cc $(HOME_CFLAGS)
+	
+	XTEST			= 0
 else
 ifeq ($(PROFILE),1)
 	PROFILE_FLAGS	+= -Rpass-missed=.*
@@ -61,6 +63,8 @@ endif
 	FAST_RANLIB		= $(FT_RANLIB)
 
 	MLX_GCC			= $(FT_GCC)
+	
+	XTEST			= 1
 endif
 
 # Print utils
