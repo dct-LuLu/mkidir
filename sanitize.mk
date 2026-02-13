@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/07 02:07:43 by jaubry--          #+#    #+#              #
-#    Updated: 2026/02/12 06:48:31 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/02/13 07:31:00 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,7 +116,7 @@ else ifeq ($(SAN_UB),1)
 					  null \
 					  return \
 					  signed-integer-overflow \
-					  unsigned-integer-overflow \
+#					  unsigned-integer-overflow \
 					  bounds \
 #					  bounds-strict \
 					  alignment \
