@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 19:28:47 by jaubry--          #+#    #+#              #
-#    Updated: 2026/02/12 22:24:59 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/02/16 19:12:36 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,12 +26,17 @@ include $(MKIDIR)/sanitize.mk
 
 ifeq ($(FAST),1)
 	OFLAGS		= -Ofast -march=native -mtune=native -msse3
-	FFLAGS		= $(OFLAGS) -flto
+	FFLAGS		= $(OFLAGS)
 endif
+
+#FFLAGS		= $(OFLAGS) -flto 
+
+#-fno-tree-vectorize
+#-mno-sse -mno-avx
 
 # Sys binaries
 STD_AR			= ar
-STD_ar			= ranlib
+STD_RANLIB		= ranlib
 
 HOME_AR			= ar
 HOME_RANLIB		= ranlib
