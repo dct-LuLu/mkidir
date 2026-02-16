@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 19:28:47 by jaubry--          #+#    #+#              #
-#    Updated: 2026/02/16 19:12:36 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/02/16 19:31:05 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,4 +74,3 @@ endif
 
 # Print utils
 include $(ROOTDIR)/mkidir/colors.mk
-
