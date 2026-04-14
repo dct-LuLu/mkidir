@@ -6,13 +6,11 @@
 #    By: jaubry-- <jaubry--@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/16 19:30:58 by jaubry--          #+#    #+#              #
-#    Updated: 2026/04/14 18:11:58 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/04/14 18:37:55 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 VERBOSE	= 0
-
--include $(DEPS)
 
 all:		$(NAME)
 fast:		$(NAME)
@@ -66,3 +64,6 @@ resan-ub:	fclean san-ub
 .PHONY: re refast redebug reinspect reprofile resan-mem resan-leak resan-ub
 
 .PHONY: help clean fclean
+
+-include $(DEPS)
+
