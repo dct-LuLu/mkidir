@@ -6,7 +6,7 @@
 #    By: jaubry-- <jaubry--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 19:28:47 by jaubry--          #+#    #+#              #
-#    Updated: 2026/02/16 19:31:05 by jaubry--         ###   ########.fr        #
+#    Updated: 2026/04/14 18:11:07 by jaubry--         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,6 @@ ifeq ($(FAST),1)
 	OFLAGS		= -Ofast -march=native -mtune=native -msse3
 	FFLAGS		= $(OFLAGS)
 endif
-
-#FFLAGS		= $(OFLAGS) -flto 
-
-#-fno-tree-vectorize
-#-mno-sse -mno-avx
 
 # Sys binaries
 STD_AR			= ar
@@ -57,7 +52,8 @@ ifeq ($(shell $(GET_ID)), $(HOME_ID))
 
 	MLX_GCC			= $(HOME_GCC)
 
-	CC				= cc $(HOME_CFLAGS)
+	CC				:= $(CC) $(HOME_CFLAGS)
+	CXX				:= $(CXX) $(HOME_CFLAGS)
 	
 	XTEST			= 0
 else
